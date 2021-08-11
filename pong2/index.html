@@ -63,6 +63,7 @@
                         game.load.audio('hit','assets/sound.wav');
                         game.load.audio('loop','assets/loop.wav');
                         game.load.audio('finish','assets/finish.wav');
+                        game.load.audio('half','assets/halfway.wav');
 
                     }
 
@@ -84,6 +85,12 @@
 
                         });
 
+                        if (score1 >= 5 && score1 <= 8) {
+                            score1_text.addColor("#ffa500", 0);
+                        } else if (score1 >=9) {
+                            score1_text.addColor("#ff0000", 0);
+                        }
+
                         score2_text = game.add.text(game.world.width - 128,128,'0',{
                             font: "64px Gabriella",
                             fill: "#ffffff",
@@ -102,6 +109,22 @@
 
                         score1_text.text = score1;
                         score2_text.text = score2;
+
+                        if (score1 >= 5 && score1 <= 8) {
+                            score1_text.addColor("#ffa500", 0);
+                        }
+
+                        if (score1 >=9) {
+                            score1_text.addColor("#ff0000", 0);
+                        }
+
+                        if (score2 >= 5 && score2 <= 8) {
+                            score2_text.addColor("#ffa500", 0);
+                        }
+
+                        if (score2 >=9) {
+                            score2_text.addColor("#ff0000", 0);
+                        }
 
                         if (score1 >= 10) {
                         	win_text = game.add.text(230,300,'Player wins!',{
@@ -154,6 +177,12 @@
                         }
                         if (score2 >= 9) {
                             game.sound.play('finish');
+                        }
+                        if (score1 <= 5 && score1 >= 5) {
+                            game.sound.play('half');
+                        }
+                        if (score2 <= 5 && score2 >= 5) {
+                            game.sound.play('half');
                         }
                     }
 
