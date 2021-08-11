@@ -78,6 +78,8 @@
 
                         game.input.onDown.add(launch_ball, this);
 
+                        
+
                         score1_text = game.add.text(128,128,'0',{
                             font: "64px Gabriella",
                             fill: "#ffffff",
@@ -156,10 +158,12 @@
                         if (ball.body.blocked.left) {
                             score2+=1;
                             check_score(score1,score2);
+                            ball_launched = false;
                             launch_ball();
                         } else if (ball.body.blocked.right) {
                             score1+=1;
                             check_score(score1,score2);
+                            ball_launched = false;
                             launch_ball();
                         }
 
@@ -222,15 +226,18 @@
 
                     function launch_ball() {
                         // body...
-                        if (ball_launched) {
+                        if (!ball_launched) {
                             ball.x = game.world.centerX;
                             ball.y = game.world.centerY;
                             ball.body.velocity.setTo(0,0);
-                            ball_launched = false;
-                        }   else {
-                                ball.body.velocity.x = -ball_velocity;
+                            ball.body.velocity.x = -ball_velocity;
+                            var yb = game.rnd.integerInRange(1, 2)
+                            if (yb <= 1) {
                                 ball.body.velocity.y = ball_velocity;
-                                ball_launched = true;
+                            } else {
+                                ball.body.velocity.y = -ball_velocity;
+                            }
+                            ball_launched = true;
                         }
                     }
                 </script>
